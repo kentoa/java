@@ -30,6 +30,9 @@ public class Statistics {
 	
 	public static void main(String[] args){
 		Statistics s = new Statistics();
+        double[] data = {1.2, 1, 4, 5, 6};
+        double var = s.variance(data);
+        System.out.println(var);
 	}
 	
 }
