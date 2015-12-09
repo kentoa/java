@@ -1,32 +1,47 @@
 import java.util.ArrayList;
+import java.util.TreeMap;
+import java.util.Iterator;
 
-public class SuffixArray { //作り途中
+public class SuffixArray {
 	
-	ArrayList<String> suffixArrayGen(String str){
-		ArrayList<String[]> list = new ArrayList<>();
-		ArrayList<String> suffix = new ArrayList<>(); 
-		String register = str;
+	ArrayList<Integer> suffixArrayGen(String str){
+		TreeMap<String, Integer> suffix = new TreeMap<>();
+		String register = str, key;
 		
 		for(int i = 0; i < str.length(); i++){
-			String[] pair = {String.valueOf(i), register.substring(0, str.length() - i)};
-			list.add(pair);
+			key = register.substring(i, str.length());
+			suffix.put(key, i);
 			register = str;
+			System.out.println(i + ", " + key);
 		}
 		
-		for(int i = 0; i < list.size(); i++){
-			System.out.println(list.get(i)[0] + ", " + list.get(i)[1]);
-		}
+		System.out.println("---sort---");
 		
-		//do sort
-		return suffix;
+		ArrayList<Integer> suffix_array = new ArrayList<>();
+		Iterator<String> iter = suffix.keySet().iterator();
+		
+	        while(iter.hasNext()){
+	            String keyval = iter.next();
+	            System.out.println(keyval + ", " + suffix.get(keyval));
+	            suffix_array.add(suffix.get(keyval));
+	        }
+		
+		return suffix_array;
 	}
 	
+	void print(ArrayList<Integer> suffix_array){
+		System.out.println("---suffix array---");
+		for(int i = 0; i < suffix_array.size(); i++){
+			System.out.print(suffix_array.get(i));
+			if(i != suffix_array.size() - 1) System.out.print(", ");
+		}
+		System.out.println();
+	}
 	
 	public static void main(String[] args){
 		SuffixArray sa = new SuffixArray();
-		
-		sa.suffixArrayGen("asdfg");
-		
+		ArrayList<Integer> result = sa.suffixArrayGen("aeadacab");
+		sa.print(result);
 	}
 	
 }
