@@ -4,20 +4,24 @@ public class RunLengthEncoding {
 		String ori = str, word; 
 		String encode = "";
 		
-		int count = 0;
+		int count = 1;
 		String tmp = ori.substring(0, 1);
-		for(int i = 0; i < str.length(); i++){
+		
+		for(int i = 1; i < str.length(); i++){
 			word = ori.substring(i, i + 1);
-			System.out.println(tmp + " " + word);
 			if(word.equals(tmp)){
 				count++;
 			}
 			else{
 				encode += tmp;
 				tmp = word;
-				encode += String.valueOf(count);
-				
+				if(count != 1) encode += String.valueOf(count);
 				count = 1;
+			}
+			
+			if(i == str.length() - 1){
+				encode += word;
+				if(count != 1) encode += String.valueOf(count);
 			}
 		}
 		System.out.println(encode);
@@ -25,8 +29,6 @@ public class RunLengthEncoding {
 	
 	public static void main(String[] args){
 		RunLengthEncoding rle = new RunLengthEncoding();
-		
-		rle.run_length_encoding("aasd");
-		
+		rle.run_length_encoding("assddd");
 	}
 }
