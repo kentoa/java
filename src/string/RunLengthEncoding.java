@@ -1,14 +1,11 @@
 
 public class RunLengthEncoding {
 	void run_length_encoding(String str){
-		String ori = str, word; 
-		String encode = "";
-		
+		String word, encode = "", tmp = str.substring(0, 1);		
 		int count = 1;
-		String tmp = ori.substring(0, 1);
 		
 		for(int i = 1; i < str.length(); i++){
-			word = ori.substring(i, i + 1);
+			word = str.substring(i, i + 1);
 			if(word.equals(tmp)){
 				count++;
 			}
